@@ -1,52 +1,68 @@
+#include "../libftprintf/ft_printf.h"
 #include "test_runner.h"
+
+int	capture_output(int (*fn)(const char *, ...), const char *fmt, char *buffer,
+		size_t buffer_size)
+{
+	int		pipe_fd[2];
+	int		saved_stdout;
+	ssize_t	bytes_read;
+	int		ret;
+	int		saved_dup;
+
+	if (pipe(pipe_fd) == -1)
+		return (-1);
+	saved_stdout = dup(1);
+	if (saved_stdout == -1)
+		return (-1);
+	saved_dup = dup2(pipe_fd[1], 1);
+	if (saved_dup == -1)
+		return (-1);
+	close(pipe_fd[1]);
+	ret = fn(fmt);
+	fflush(stdout);
+	if (dup2(saved_stdout, 1) == -1)
+		return (-1);
+	close(saved_stdout);
+	bytes_read = read(pipe_fd[0], buffer, buffer_size - 1);
+	close(pipe_fd[0]);
+	if (bytes_read < 0)
+		return (-1);
+	buffer[bytes_read] = '\0';
+	return (ret);
+}
 
 int	test_literal(void)
 {
-	int pipe_fd[2];
-	int saved_stdout;
-	char buffer[100];
-	ssize_t bytes_read;
-	int ft;
-	int pf;
-	int success;
+	int success = 1;
+	const char *str = "string_compare";
+	char buffer_printf[128];
+	char buffer_ft[128];
+	int r_printf;
+	int r_ft;
 
-	// Create pipe
-	if (pipe(pipe_fd) == -1)
-		return (0);
+	r_printf = capture_output(printf, str, buffer_printf,
+			sizeof(buffer_printf));
+	r_ft = capture_output(ft_printf, str, buffer_ft, sizeof(buffer_ft));
+	if (r_ft == -1 || r_printf == -1)
+	{
+		success = 0;
+		printf(RED "capture output failed\n" RESET);
+	}
+	if (r_printf != r_ft | strcmp(buffer_printf, buffer_ft) != 0)
+		success = 0;
 
-	// Save current stdout
-	saved_stdout = dup(1);
-	if (saved_stdout == -1)
-		return (0);
+	if (!success)
+	{
+		printf("EXPECTED string to be equal to %s but output was %s \n\n", str,
+			buffer_ft);
+		if (r_printf != r_ft)
+			printf("EXPECTED %d to be equal to %d\n\n", r_printf, r_ft);
+	}
 
-	// Redirect stdout to pipe write
-	dup2(pipe_fd[1], 1);
-	close(pipe_fd[1]);
-
-	// Call functions
-	pf = printf("Hello");
-	ft = ft_printf("Hello");
-
-	// Restore stdout
-	dup2(saved_stdout, 1);
-	close(saved_stdout);
-
-	/* 6. Read from pipe */
-	bytes_read = read(pipe_fd[0], buffer, sizeof(buffer) - 1);
-	close(pipe_fd[0]);
-
-	buffer[bytes_read] = '\0';
-
-	/* 7. Compare */
-	if (pf != ft)
-		printf(GREEN "TEST_LITERAL [OK]" RESET);
-	if (strcmp(buffer, "HelloHello") != 0)
-		return (0);
-	// END TEST
 	if (success)
-		printf(GREEN "TEST_LITERAL [OK]" RESET);
+		printf(GREEN "TEST_LITERAL [OK]\n" RESET);
 	else
-		printf(RED "TEST_LITERAL [FAIL]" RESET);
-
+		printf(RED "TEST_LITERAL [FAIL]\n" RESET);
 	return (success);
 }

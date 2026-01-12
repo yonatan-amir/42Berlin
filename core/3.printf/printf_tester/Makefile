@@ -7,7 +7,8 @@ NAME = testrunner.a
 
 # Path to libft
 LIBFT_DIR = ../libftprintf/
-LIBFT = $(LIBFT_DIR)/libftprintf.a
+LIBFTPRINTF = $(LIBFT_DIR)/libftprintf.a
+LIBFT =$(LIBFT_DIR)/libft/libft.a
 
 # Automatically detect all .c files in this directory
 SRCS = $(wildcard *.c)
@@ -32,12 +33,12 @@ all:
 	@echo "$(GREEN)Tests ready: $(NAME)$(RESET)"
 
 # Build final executable
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(OBJS) $(LIBFTPRINTF) $(LIBFT)
 	@echo "$(YELLOW)Linking $(NAME)...$(RESET)"
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFTPRINTF) $(LIBFT) -o $(NAME)
 
 # Build libft
-$(LIBFT):
+$(LIBFTPRINTF):
 	@echo "$(YELLOW)Building libft...$(RESET)"
 	@$(MAKE) -C $(LIBFT_DIR)
 

@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   test_runner.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamir <yamir@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jonathanamir <jonathanamir@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 12:27:44 by yamir             #+#    #+#             */
-/*   Updated: 2025/12/13 16:53:17 by yamir            ###   ########.fr       */
+/*   Updated: 2026/01/12 12:26:40 by jonathanami      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test_runner.h"
 
-t_test_case	g_test_cases[] = {};
+t_test_case	g_test_cases[] = {
+	{"literal", test_literal},
+};
 
 int	main(void)
 {
