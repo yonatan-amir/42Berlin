@@ -7,7 +7,14 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # Mandatory sources
-SRCS = ft_printf.c 
+SRCS =	ft_printf.c \
+				ft_handle_percent.c \
+				ft_handle_char.c \
+				ft_handle_str.c \
+				ft_handle_int.c \
+				ft_handle_ptr.c \
+				ft_handle_u.c \
+				ft_handle_x.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -38,7 +45,6 @@ all:
 $(NAME): $(OBJS) $(LIBFT)
 	@echo "$(YELLOW)Creating $(NAME)...$(RESET)"
 	@ar rcs $(NAME) $(OBJS)
-	@ar rcs $(NAME) $(LIBFT)
 
 clean:
 	@echo "$(YELLOW)Cleaning object files...$(RESET)"

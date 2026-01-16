@@ -2,14 +2,15 @@
 #include "capture_output.h"
 #include "test_runner.h"
 
-int	test_literal(void)
+int	test_percent(void)
 {
 	int			success;
-	const char	*str = "string_compare";
+	const char	*str = "100%%";
 	char		buffer_printf[128];
 	char		buffer_ft[128];
 	int			r_printf;
 	int			r_ft;
+	const char	*expected = "100%";
 
 	success = 1;
 	r_printf = capture_output(printf, str, buffer_printf,
@@ -24,14 +25,14 @@ int	test_literal(void)
 		success = 0;
 	if (!success)
 	{
-		printf("EXPECTED string to be equal to %s but output was %s \n\n", str,
-			buffer_ft);
+		printf("EXPECTED string to be equal to %s but output was %s \n\n",
+			expected, buffer_ft);
 		if (r_printf != r_ft)
 			printf("EXPECTED %d to be equal to %d\n\n", r_printf, r_ft);
 	}
 	if (success)
-		printf(GREEN "TEST_LITERAL [OK]\n\n" RESET);
+		printf(GREEN "TEST_PERCENT [OK]\n\n" RESET);
 	else
-		printf(RED "TEST_LITERAL [FAIL]\n\n" RESET);
+		printf(RED "TEST_PERCENT [FAIL]\n\n" RESET);
 	return (success);
 }

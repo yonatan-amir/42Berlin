@@ -1,19 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   test_runner.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jonathanamir <jonathanamir@student.42.f    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/13 12:27:44 by yamir             #+#    #+#             */
-/*   Updated: 2026/01/12 12:26:40 by jonathanami      ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "test_runner.h"
 
 t_test_case	g_test_cases[] = {
 	{"literal", test_literal},
+	{"percent", test_percent},
+	{"char", test_char},
+	{"string", test_string},
+	{"int", test_int},
+	{"ptr", test_ptr},
+	{"u", test_u},
+	{"x", test_x},
+	{"X", test_upperx},
 };
 
 int	main(void)

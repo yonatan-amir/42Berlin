@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   test_runner.h                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jonathanamir <jonathanamir@student.42.f    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/13 12:26:43 by yamir             #+#    #+#             */
-/*   Updated: 2026/01/12 12:26:13 by jonathanami      ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef TEST_RUNNER_H
 # define TEST_RUNNER_H
@@ -30,5 +19,13 @@ typedef struct s_test_case
 }				t_test_case;
 
 int				test_literal(void);
+int				test_percent(void);
+int				test_char(void);
+int				test_string(void);
+int				test_int(void);
+int				test_ptr(void);
+int				test_u(void);
+int				test_upperx(void);
+int				test_x(void);
 
 #endif
