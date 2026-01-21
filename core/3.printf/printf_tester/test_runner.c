@@ -11,6 +11,7 @@ t_test_case	g_test_cases[] = {
 	{"u", test_u},
 	{"x", test_x},
 	{"X", test_upperx},
+	{"bonus", test_bonus},
 };
 
 int	main(void)

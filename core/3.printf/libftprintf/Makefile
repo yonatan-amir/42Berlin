@@ -14,7 +14,8 @@ SRCS =	ft_printf.c \
 				ft_handle_int.c \
 				ft_handle_ptr.c \
 				ft_handle_u.c \
-				ft_handle_x.c
+				ft_handle_x.c \
+				ft_parse.c 
 
 OBJS = $(SRCS:.c=.o)
 

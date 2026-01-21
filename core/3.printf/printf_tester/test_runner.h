@@ -27,5 +27,6 @@ int				test_ptr(void);
 int				test_u(void);
 int				test_upperx(void);
 int				test_x(void);
+int				test_bonus(void);
 
 #endif

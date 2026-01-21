@@ -6,16 +6,16 @@
 /*   By: jonathanamir <jonathanamir@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 16:39:19 by yamir             #+#    #+#             */
-/*   Updated: 2026/01/16 22:04:48 by jonathanami      ###   ########.fr       */
+/*   Updated: 2026/01/19 17:56:20 by jonathanami      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	handle_case_basic(const char *s, int *i, int *char_printed,
+static int	handle_case_basic(t_flags *f, int *i, int *char_printed,
 		va_list *args)
 {
-	switch (s[*i + 1])
+	switch (f->spec)
 	{
 	case '%':
 		ft_handle_percent(i) == 1 && (*char_printed += 1);
@@ -31,10 +31,10 @@ static int	handle_case_basic(const char *s, int *i, int *char_printed,
 	}
 }
 
-static int	handle_case_num(const char *s, int *i, int *char_printed,
+static int	handle_case_num(t_flags *f, int *i, int *char_printed,
 		va_list *args)
 {
-	switch (s[*i + 1])
+	switch (f->spec)
 	{
 	case 'd':
 	case 'i':
@@ -57,20 +57,21 @@ static int	handle_case_num(const char *s, int *i, int *char_printed,
 	}
 }
 
-static int	handle_case(const char *s, int *i, int *char_printed, va_list *args)
+static int	handle_case(t_flags *f, int *i, int *char_printed, va_list *args)
 {
-	if (handle_case_basic(s, i, char_printed, args))
+	if (handle_case_basic(f, i, char_printed, args))
 		return (1);
-	if (handle_case_num(s, i, char_printed, args))
+	if (handle_case_num(f, i, char_printed, args))
 		return (1);
 	return (0);
 }
 
 int	ft_printf(const char *s, ...)
 {
-	va_list	args;
 	int		i;
 	int		char_printed;
+	t_flags	flags;
+	va_list	args;
 
 	if (!s)
 		return (0);
@@ -80,13 +81,17 @@ int	ft_printf(const char *s, ...)
 	while (s[i])
 	{
 		if (s[i] == '%')
-			handle_case(s, &i, &char_printed, &args);
+		{
+			i++;
+			flag_brain(s, &i, &flags);
+			handle_case(&flags, &i, &char_printed, &args);
+		}
 		else
 		{
 			write(1, &s[i], 1);
 			char_printed += 1;
+			i++;
 		}
-		i++;
 	}
 	va_end(args);
 	return (char_printed);
