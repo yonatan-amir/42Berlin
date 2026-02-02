@@ -48,6 +48,7 @@ vgcore.*
 *.zip
 *.tar
 *.tar.gz
+*.pdf
 
 ####################################
 # Temporary files
