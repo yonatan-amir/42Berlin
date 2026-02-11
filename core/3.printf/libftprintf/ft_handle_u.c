@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void	ft_u_nbr_fd(unsigned n, int fd)
+static void	ft_u_nbr_fd(unsigned int n, int fd)
 {
 	char	c;
 
@@ -21,23 +21,28 @@ static void	ft_u_nbr_fd(unsigned n, int fd)
 	c = (n % 10) + '0';
 	write(fd, &c, 1);
 }
+
+static int	ft_u_len(unsigned int n)
+{
+	int	len;
+
+	len = 1;
+	while (n >= 10)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
+}
+
 int	ft_handle_u(int *i, va_list *args)
 {
-	unsigned int n;
-	int counter;
-	unsigned long temp;
+	unsigned int	n;
+	int				counter;
 
 	n = va_arg(*args, unsigned int);
 	ft_u_nbr_fd(n, 1);
-	temp = n;
-	counter = 0;
-	if (temp == 0)
-		counter = 1;
-	while (temp > 0)
-	{
-		temp /= 10;
-		counter++;
-	}
+	counter = ft_u_len(n);
 	(*i)++;
 	return (counter);
 }

@@ -12,65 +12,43 @@
 
 #include "ft_printf.h"
 
-static int	handle_case_basic(t_flags *f, int *i, int *char_printed,
-		va_list *args)
-{
-	switch (f->spec)
-	{
-	case '%':
-		ft_handle_percent(i) == 1 && (*char_printed += 1);
-		return (1);
-	case 'c':
-		ft_handle_char(i, args) == 1 && (*char_printed += 1);
-		return (1);
-	case 's':
-		*char_printed += ft_handle_str(i, args);
-		return (1);
-	default:
-		return (0);
-	}
-}
-
-static int	handle_case_num(t_flags *f, int *i, int *char_printed,
-		va_list *args)
-{
-	switch (f->spec)
-	{
-	case 'd':
-	case 'i':
-		*char_printed += ft_handle_int(i, args);
-		return (1);
-	case 'p':
-		*char_printed += ft_handle_ptr(i, args);
-		return (1);
-	case 'u':
-		*char_printed += ft_handle_u(i, args);
-		return (1);
-	case 'x':
-		*char_printed += ft_handle_x(i, args, "0123456789abcdef");
-		return (1);
-	case 'X':
-		*char_printed += ft_handle_x(i, args, "0123456789ABCDEF");
-		return (1);
-	default:
-		return (0);
-	}
-}
-
 static int	handle_case(t_flags *f, int *i, int *char_printed, va_list *args)
 {
-	if (handle_case_basic(f, i, char_printed, args))
-		return (1);
-	if (handle_case_num(f, i, char_printed, args))
-		return (1);
-	return (0);
+	if (f->spec == '%')
+		*char_printed += ft_handle_percent(i);
+	else if (f->spec == 'c')
+		*char_printed += ft_handle_char(i, args);
+	else if (f->spec == 's')
+		*char_printed += ft_handle_str(i, args);
+	else if (f->spec == 'd' || f->spec == 'i')
+		*char_printed += ft_handle_int(i, args);
+	else if (f->spec == 'p')
+		*char_printed += ft_handle_ptr(i, args);
+	else if (f->spec == 'u')
+		*char_printed += ft_handle_u(i, args);
+	else if (f->spec == 'x')
+		*char_printed += ft_handle_x(i, args, "0123456789abcdef");
+	else if (f->spec == 'X')
+		*char_printed += ft_handle_x(i, args, "0123456789ABCDEF");
+	else
+		return (0);
+	return (1);
+}
+
+static void	handle_percent(const char *s, int *i, int *char_printed,
+		va_list *args)
+{
+	t_flags	flags;
+
+	(*i)++;
+	flag_brain(s, i, &flags);
+	handle_case(&flags, i, char_printed, args);
 }
 
 int	ft_printf(const char *s, ...)
 {
 	int		i;
 	int		char_printed;
-	t_flags	flags;
 	va_list	args;
 
 	if (!s)
@@ -81,11 +59,7 @@ int	ft_printf(const char *s, ...)
 	while (s[i])
 	{
 		if (s[i] == '%')
-		{
-			i++;
-			flag_brain(s, &i, &flags);
-			handle_case(&flags, &i, &char_printed, &args);
-		}
+			handle_percent(s, &i, &char_printed, &args);
 		else
 		{
 			write(1, &s[i], 1);

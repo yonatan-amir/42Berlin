@@ -14,7 +14,7 @@
 
 int	ft_handle_percent(int *i)
 {
-	char c;
+	char	c;
 
 	c = '%';
 	write(1, &c, 1);

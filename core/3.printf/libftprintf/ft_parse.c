@@ -13,31 +13,26 @@
 #include "ft_printf.h"
 #include "libft/libft.h"
 
+static void	set_flag(char c, t_flags *f)
+{
+	if (c == '-')
+		f->minus = 1;
+	else if (c == '+')
+		f->plus = 1;
+	else if (c == '#')
+		f->sharp = 1;
+	else if (c == '0')
+		f->zero = 1;
+	else if (c == ' ')
+		f->space = 1;
+}
+
 static void	parse_flags(const char *s, int *i, t_flags *f)
 {
 	while (s[*i] == '-' || s[*i] == '+' || s[*i] == '#' || s[*i] == '0'
 		|| s[*i] == ' ')
 	{
-		switch (s[*i])
-		{
-		case '-':
-			f->minus = 1;
-			break ;
-		case '+':
-			f->plus = 1;
-			break ;
-		case '#':
-			f->sharp = 1;
-			break ;
-		case '0':
-			f->zero = 1;
-			break ;
-		case ' ':
-			f->space = 1;
-			break ;
-		default:
-			break ;
-		}
+		set_flag(s[*i], f);
 		(*i)++;
 	}
 }

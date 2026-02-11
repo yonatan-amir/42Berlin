@@ -44,14 +44,14 @@ int	ft_handle_ptr(int *i, va_list *args)
 	int				count;
 
 	p = va_arg(*args, void *);
-	write(1, "0x", 2);
-	count = 2;
 	if (p == NULL)
 	{
-		write(1, "0", 1);
+		write(1, "(nil)", 5);
 		(*i)++;
-		return (count + 1);
+		return (5);
 	}
+	write(1, "0x", 2);
+	count = 2;
 	v = (unsigned long)p;
 	count += print_hex_ul(v);
 	(*i)++;
