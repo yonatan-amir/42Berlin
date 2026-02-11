@@ -19,7 +19,5 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
-int		has_n(char *s);
-char	*append(char *stash, char *buf);
-char	*split(char **stash);
+
 #endif

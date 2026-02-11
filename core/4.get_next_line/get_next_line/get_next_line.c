@@ -12,6 +12,10 @@
 
 #include "get_next_line.h"
 
+int			has_n(char *s);
+char		*append(char *stash, char *buf);
+char		*split(char **stash);
+
 static void	clear(char **stash)
 {
 	free(*stash);
