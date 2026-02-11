@@ -1,4 +1,4 @@
-#include "../libftprintf/ft_printf.h"
+#include "../_source/ft_printf.h"
 #include "capture_output.h"
 #include "test_runner.h"
 

@@ -6,7 +6,7 @@ NAME = testrunner.a
 
 
 # Path to libft
-LIBFT_DIR = ../libftprintf/
+LIBFT_DIR = ../_source/
 LIBFTPRINTF = $(LIBFT_DIR)/libftprintf.a
 LIBFT =$(LIBFT_DIR)/libft/libft.a
 

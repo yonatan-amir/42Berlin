@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "../get_next_line/get_next_line.h"
+#include "../_source/get_next_line.h"
 
 static void	write_line(int fd, int len, int add_nl, char ch)
 {

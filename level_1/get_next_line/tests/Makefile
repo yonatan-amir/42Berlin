@@ -4,10 +4,10 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 BUFFER_SIZE ?= 42
 
-SRC = main.c ../get_next_line/get_next_line.c ../get_next_line/get_next_line_utils.c
+SRC = main.c ../_source/get_next_line.c ../_source/get_next_line_utils.c
 OBJ = $(SRC:.c=.o)
 
-EDGE_SRC = edge_test.c ../get_next_line/get_next_line.c ../get_next_line/get_next_line_utils.c
+EDGE_SRC = edge_test.c ../_source/get_next_line.c ../_source/get_next_line_utils.c
 EDGE_OBJ = $(EDGE_SRC:.c=.o)
 
 all: $(NAME)

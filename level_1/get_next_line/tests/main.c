@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "../get_next_line/get_next_line.h"
+#include "../_source/get_next_line.h"
 
 static void read_all(int fd)
 {

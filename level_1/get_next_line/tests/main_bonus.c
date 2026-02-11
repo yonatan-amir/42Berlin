@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "../get_next_line/get_next_line_bonus.h"
+#include "../_source/get_next_line_bonus.h"
 
 static void print_line(const char *tag, char *line, int index)
 {

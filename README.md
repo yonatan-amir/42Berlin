@@ -19,14 +19,20 @@ Main goals of this repo:
 - `piscine/`
   - Piscine exercises and rushes
 - `pre_core/`
-  - Early preparatory projects (before Common Core)
+  - Early preparatory projects
 - `Level_0/`
-  - First Common Core level projects (example: `libft`)
+  - Core level 0 projects
 - `level_1/`
-  - Intermediate Common Core projects (example: `get_next_line`, `printf`,
-    `born_2_b_root`)
+  - Core level 1 projects
 - `level_2/`
-  - Later Common Core projects (example: `push_swap`)
+  - Core level 2 projects
+
+Project folder convention:
+
+- `level_X/<project>/_source/`
+  - Main project code to copy into a fresh 42 submission repository
+- `level_X/<project>/tests/` or `level_X/<project>/*tester/`
+  - Local test harnesses that compile against `../_source/...`
 
 ## Working Conventions
 
@@ -40,11 +46,20 @@ Main goals of this repo:
 ## How To Work In This Repo
 
 1. Enter the target project directory.
-2. Read the project subject and verify allowed functions.
-3. Build with the local `Makefile`.
-4. Run tests from local tester folders (if present).
-5. Run `norminette` and fix all reported issues.
-6. Re-test after each logic/style fix.
+2. Work only inside `_source/` for code changes.
+3. Read the project subject and verify allowed functions.
+4. Build with `_source/Makefile`.
+5. Run tests from local tester folders (if present).
+6. Run `norminette` and fix all reported issues.
+7. Re-test after each logic/style fix.
+
+## Submission Flow
+
+1. Create/clone the official 42 project repository.
+2. Copy content from local `_source/` into that fresh repo.
+3. Verify required files and Makefile targets.
+4. Run final build + norm + tests.
+5. Commit and push to the official 42 repository.
 
 ## Readme Policy
 

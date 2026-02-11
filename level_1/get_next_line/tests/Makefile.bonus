@@ -3,7 +3,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 BUFFER_SIZE ?= 42
 
-SRC = main_bonus.c ../get_next_line/get_next_line_bonus.c ../get_next_line/get_next_line_utils_bonus.c
+SRC = main_bonus.c ../_source/get_next_line_bonus.c ../_source/get_next_line_utils_bonus.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
