@@ -45,6 +45,7 @@ all:
 #Start Building 
 $(NAME): $(OBJS) $(LIBFT)
 	@echo "$(YELLOW)Creating $(NAME)...$(RESET)"
+	cp $(LIBFT) $(NAME)
 	@ar rcs $(NAME) $(OBJS)
 
 clean:
