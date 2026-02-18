@@ -8,6 +8,9 @@ int	main(int argc, char **argv)
 	stack_struct(argc, argv); // I get then node stack
 	// 1. check num of args with argc
 	// 2. build the stacks
+	// what is made of
+	// does it need new page
+	// do you many nodes
 	// 3. assign each to a linked list
 	// 4. sort
 	// if error
@@ -15,18 +18,6 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-static t_node	*node_struct(int value, int index)
-{
-	t_node	*node;
-
-	node = (t_node *)malloc(sizeof(t_node));
-	if (!node)
-		return (NULL);
-	node->value = value;
-	node->index = index;
-	node->next = NULL;
-	return (node);
-}
 // sa (swap a): Swap the first 2 elements at the top of stack a.
 // Do nothing if there is only one element or none.
 

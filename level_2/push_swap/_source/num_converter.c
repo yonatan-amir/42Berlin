@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   num_converter.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonatanamir <yonatanamir@student.42.fr>    +#+  +:+       +#+        */
+/*   By: yamir <yamir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 11:55:12 by yonatanamir       #+#    #+#             */
-/*   Updated: 2026/02/06 18:39:16 by yonatanamir      ###   ########.fr       */
+/*   Updated: 2026/02/18 19:30:18 by yamir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	*num_converter(const char *nptr, int *out_count)
 	int		nbr;
 	char	**tokens;
 	int		*nums;
+	int		temp;
+	int		i;
 
 	status = 0;
 	tokens = check_spaces(&status, nptr);
@@ -26,17 +28,34 @@ int	*num_converter(const char *nptr, int *out_count)
 		return (*out_count = 0, NULL);
 	else if (status == 0)
 	{
-		if (check_digit(nptr))
-		{
-			ft_atoi_swap(nptr, &nbr);
-			nums = malloc(sizeof(int));
-			if (!nums)
-				return (NULL);
-			nums[0] = nbr;
-			return (*out_count = 1, nums);
-		}
-		return (NULL);
+		temp = ft_atoi_swap(nptr, &nbr);
+		if (!temp)
+			return (*out_count = 0, NULL);
+		nums = malloc(sizeof(int));
+		if (!nums)
+			return (NULL);
+		nums[0] = nbr;
+		return (*out_count = 1, nums);
 	}
+	else
+	{
+		*out_count = 0;
+		while (tokens[*out_count])
+			*out_count++;
+		nums = malloc(sizeof(int) * *out_count);
+		if (!nums)
+			return (free(tokens), *out_count = 0, NULL);
+	}
+	i = 0;
+	while (i < *out_count - 1)
+	{
+		if (!ft_atoi_swap(tokens[i], &nbr))
+			return (free(tokens), *out_count = 0, NULL);
+		nums[i] = nbr;
+		i++;
+	}
+	free(tokens);
+	return (nums);
 }
 
 int	ft_atoi_swap(const char *nptr, int *out)

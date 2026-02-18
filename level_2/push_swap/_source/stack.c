@@ -35,24 +35,6 @@ static t_stack	*init_stack(void)
 	stack->size = 0;
 	return (stack);
 }
-static int	first_node(t_stack *stack, int *i, int argc, char **argv)
-{
-	t_node	*node;
-	int		num;
-
-	num = atoi(argv[*i]);
-	if (!num)
-		return (0);
-	node = node_struct(num, i);
-	if (node == 0)
-		return (0);
-	stack->head = node;
-	stack->tail = node;
-	stack->tail->next = node;
-	stack->size += 1;
-	(*i)++;
-	return (1);
-}
 
 static int	stack_loop(t_stack *stack, int *i, int argc, char **argv)
 {
@@ -60,7 +42,7 @@ static int	stack_loop(t_stack *stack, int *i, int argc, char **argv)
 
 	while (i < argc)
 	{
-		node = node_struct(atoi(argv[i]), i);
+		node = node_struct(atoi(argv[*i]), i);
 		if (!node)
 			return (0);
 		stack->tail->next = node;

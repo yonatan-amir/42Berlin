@@ -14,31 +14,17 @@ Mandatory behavior:
 
 # Instructions
 
-Build (mandatory):
+cc:
 
 ```sh
-make
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c ../tests/main.c -o gnl_test
 ```
 
-Rebuild from scratch:
-
-```sh
-make re
-```
-
-Build with a specific buffer size:
-
-```sh
-make re BUFFER_SIZE=42
-```
 
 Output:
 
-- `get_next_line.a`
+- `gnl_test`
 
-Local tests (not submitted):
-
-- `../tests/`
 
 # Library Flow (How it Works)
 
