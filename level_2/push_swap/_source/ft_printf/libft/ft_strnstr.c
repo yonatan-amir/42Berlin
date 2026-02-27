@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonathanamir <jonathanamir@student.42.f    +#+  +:+       +#+        */
+/*   By: yamir <yamir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 16:43:57 by yamir             #+#    #+#             */
-/*   Updated: 2025/12/11 13:12:11 by jonathanami      ###   ########.fr       */
+/*   Updated: 2025/12/05 14:44:30 by yamir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t	i;
 	size_t	j;
 
-	if (!big && len == 0)
-		return (NULL);
 	if (!*little)
 		return ((char *)big);
 	i = 0;

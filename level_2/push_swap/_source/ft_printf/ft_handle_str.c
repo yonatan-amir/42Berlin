@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_handle_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jonathanamir <jonathanamir@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/05 16:47:59 by yamir             #+#    #+#             */
-/*   Updated: 2025/12/11 13:16:21 by jonathanami      ###   ########.fr       */
+/*   Created: 2026/01/14 12:54:32 by jonathanami       #+#    #+#             */
+/*   Updated: 2026/01/16 21:21:45 by jonathanami      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-t_list	*ft_lstlast(t_list *lst)
+int	ft_handle_str(int *i, va_list *args)
 {
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	const char	*s;
+	int			counter;
+
+	s = va_arg(*args, const char *);
+	if (s == NULL)
+	{
+		write(1, "(null)", 6);
+		(*i)++;
+		return (6);
+	}
+	counter = 0;
+	while (*s)
+	{
+		write(1, s, 1);
+		s++;
+		counter++;
+	}
+	(*i)++;
+	return (counter);
 }

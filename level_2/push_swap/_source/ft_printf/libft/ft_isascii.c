@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonathanamir <jonathanamir@student.42.f    +#+  +:+       +#+        */
+/*   By: yamir <yamir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:35:39 by yamir             #+#    #+#             */
-/*   Updated: 2025/12/11 13:12:52 by jonathanami      ###   ########.fr       */
+/*   Updated: 2025/11/27 13:45:46 by yamir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 int	ft_isascii(int c)
 {
-	return (c >= 0 && c <= 127);
+	if (c < 0 || c > 127)
+		return (0);
+	return (1);
 }

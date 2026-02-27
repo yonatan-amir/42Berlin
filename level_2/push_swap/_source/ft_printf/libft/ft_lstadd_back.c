@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonathanamir <jonathanamir@student.42.f    +#+  +:+       +#+        */
+/*   By: yamir <yamir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/20 13:31:20 by yamir             #+#    #+#             */
-/*   Updated: 2025/12/11 13:05:12 by jonathanami      ###   ########.fr       */
+/*   Created: 2025/12/05 16:53:26 by yamir             #+#    #+#             */
+/*   Updated: 2025/12/05 19:05:13 by yamir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isdigit(int c)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	return (c >= '0' && c <= '9');
+	int		i;
+	t_list	*p;
+
+	if (!new || !lst)
+		return ;
+	if (!*lst)
+	{
+		new->next = NULL;
+		*lst = new;
+		return ;
+	}
+	p = *lst;
+	i = 0;
+	while (p->next)
+	{
+		p = p->next;
+		i++;
+	}
+	p->next = new;
 }

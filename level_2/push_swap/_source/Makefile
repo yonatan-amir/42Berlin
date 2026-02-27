@@ -1,53 +1,68 @@
-## VARIABLES
+NAME      := push_swap
+CC        := cc
+CFLAGS    := -Wall -Wextra -Werror
 
-NAME = push_swap
+RESET   := \033[0m
+BLUE    := \033[1;34m
+GREEN   := \033[1;32m
+RED     := \033[1;31m
 
-# Path to libft
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
+PRINTF_DIR := ft_printf
+PRINTF     := $(PRINTF_DIR)/libftprintf.a
 
-# Mandatory sources
-SRCS =	 \
-				
+LIBFT_DIR := ft_printf/libft
+LIBFT     := $(LIBFT_DIR)/libft.a
 
-OBJS = $(SRCS:.c=.o)
+SRCS := push_swap.c \
+		init_program.c \
+		clean_program.c \
+		sort.c \
+		num_converter.c \
+		parser.c \
 
-# Compiler settings
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+OBJS := $(SRCS:.c=.o)
 
-# Colors
-GREEN = \\033[0;32m
-YELLOW = \\033[0;33m
-RESET = \\033[0m
+.PHONY: all clean fclean re objs
 
-#COMMANDS
-
-#BUILD PLAN
 all: $(NAME)
 
-#Start Building 
-$(NAME): $(OBJS) $(LIBFT)
-	@echo "$(GREEN)Starting build...$(RESET)"
-	@echo "$(YELLOW)Creating $(NAME)...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
-	@echo "$(GREEN)Build complete!$(RESET)"
+objs:
+	@printf "$(BLUE)[INFO]$(RESET) Compiling sources\n"
+	@$(MAKE) --no-print-directory $(OBJS) \
+	&& printf "$(GREEN)[OK]$(RESET) Sources compiled\n" \
+	|| { printf "$(RED)[FAIL]$(RESET) Source compilation failed\n"; exit 1; }
 
-## LIBFT RULES
+$(NAME): objs $(PRINTF) $(LIBFT)
+	@printf "$(BLUE)[INFO]$(RESET) Linking $(NAME)\n"
+	@$(CC) $(CFLAGS) $(OBJS) $(PRINTF) $(LIBFT) -o $(NAME) \
+	&& printf "$(GREEN)[OK]$(RESET) Build complete: $(NAME)\n" \
+	|| { printf "$(RED)[FAIL]$(RESET) Link failed: $(NAME)\n"; exit 1; }
+
+$(PRINTF):
+	@printf "$(BLUE)[INFO]$(RESET) Building ft_printf\n"
+	@$(MAKE) -C $(PRINTF_DIR) \
+	&& printf "$(GREEN)[OK]$(RESET) ft_printf ready\n" \
+	|| { printf "$(RED)[FAIL]$(RESET) ft_printf build failed\n"; exit 1; }
+
 $(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR)
+	@printf "$(BLUE)[INFO]$(RESET) Building libft\n"
+	@$(MAKE) -C $(LIBFT_DIR) \
+	&& printf "$(GREEN)[OK]$(RESET) libft ready\n" \
+	|| { printf "$(RED)[FAIL]$(RESET) libft build failed\n"; exit 1; }
 
-# Build Rule for .o files 
-%.o: %.c 
-	@echo "$(GREEN)Compiling $<...$(RESET)"
+%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@echo "$(YELLOW)Cleaning object files...$(RESET)"
-	@rm -f $(OBJS)
+	@printf "$(BLUE)[INFO]$(RESET) Cleaning objects\n"
+	@rm -f $(OBJS) \
+	&& printf "$(GREEN)[OK]$(RESET) Objects removed\n" \
+	|| { printf "$(RED)[FAIL]$(RESET) Clean failed\n"; exit 1; }
 
 fclean: clean
-	@echo "$(YELLOW)Removing $(NAME)...$(RESET)"
-	@rm -f $(NAME)
+	@printf "$(BLUE)[INFO]$(RESET) Removing binary $(NAME)\n"
+	@rm -f $(NAME) \
+	&& printf "$(GREEN)[OK]$(RESET) Binary removed\n" \
+	|| { printf "$(RED)[FAIL]$(RESET) fclean failed\n"; exit 1; }
 
 re: fclean all

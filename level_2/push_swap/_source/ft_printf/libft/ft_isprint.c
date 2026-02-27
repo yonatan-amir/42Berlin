@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonathanamir <jonathanamir@student.42.f    +#+  +:+       +#+        */
+/*   By: yamir <yamir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/05 16:53:26 by yamir             #+#    #+#             */
-/*   Updated: 2025/12/11 13:15:55 by jonathanami      ###   ########.fr       */
+/*   Created: 2025/11/20 13:39:58 by yamir             #+#    #+#             */
+/*   Updated: 2025/11/27 13:43:48 by yamir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int	ft_isprint(int c)
 {
-	t_list	*p;
-
-	if (!new || !lst)
-		return ;
-	if (!*lst)
-	{
-		new->next = NULL;
-		*lst = new;
-		return ;
-	}
-	p = *lst;
-	while (p->next)
-		p = p->next;
-	p->next = new;
+	if (c >= 32 && c <= 126)
+		return (1);
+	return (0);
 }

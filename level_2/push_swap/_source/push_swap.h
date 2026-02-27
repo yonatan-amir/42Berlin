@@ -1,31 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yonatanamir <yonatanamir@student.42.fr>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 14:05:41 by yonatanamir       #+#    #+#             */
-/*   Updated: 2026/02/05 14:22:56 by yonatanamir      ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-typedef struct s_ps
-{
-	t_stack			a;
-	t_stack			b;
-}					t_ps;
-
-typedef struct s_stack
-{
-	t_node			*head;
-	t_node			*tail;
-	int				size;
-
-}					t_stack;
+# include <stddef.h>
 
 typedef struct s_node
 {
@@ -35,4 +11,23 @@ typedef struct s_node
 
 }					t_node;
 
+typedef struct s_stack
+{
+	t_node			*head;
+	t_node			*tail;
+	int				size;
+
+}					t_stack;
+
+typedef struct s_ps
+{
+	t_stack			a;
+	t_stack			b;
+}					t_ps;
+
+int					init_program(t_ps *wrapper, int argc, char **argv);
+void				clean_program(t_ps *wrapper);
+int					sort(t_ps *wrapper);
+int					parser(int *status, int **nums, int *count, int argc,
+						char **argv);
 #endif

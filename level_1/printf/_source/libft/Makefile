@@ -66,31 +66,31 @@ RESET = \\033[0m
 ## RULES
 
 all: 
-	@echo "$(GREEN)Starting build...$(RESET)"
+	@printf "$(GREEN)Starting build...$(RESET)\n"
 	@$(MAKE) $(NAME)
-	@echo "$(GREEN)Build complete!$(RESET)"
+	@printf "$(GREEN)Build complete!$(RESET)\n"
 
 $(NAME): $(OBJS)
-	@echo "$(YELLOW)Creating $(NAME)...$(RESET)"
+	@printf "$(YELLOW)Creating $(NAME)...$(RESET)\n"
 	@ar rcs $(NAME) $(OBJS)
 
 # Build rule for .o files
 %.o: %.c libft.h
-	@echo "$(GREEN)Compiling $<...$(RESET)"
+	@printf "$(GREEN)Compiling $<...$(RESET)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Bonus rule (adds bonus objs to the library)
 bonus: $(OBJS) $(OBJS_BONUS)
-	@echo "$(YELLOW)Adding bonus files...$(RESET)"
+	@printf "$(YELLOW)Adding bonus files...$(RESET)\n"
 	@ar rcs $(NAME) $(OBJS) $(OBJS_BONUS)
-	@echo "$(GREEN)Bonus build complete!$(RESET)"
+	@printf "$(GREEN)Bonus build complete!$(RESET)\n"
 
 clean:
-	@echo "$(YELLOW)Cleaning object files...$(RESET)"
+	@printf "$(YELLOW)Cleaning object files...$(RESET)\n"
 	@rm -f $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
-	@echo "$(YELLOW)Removing $(NAME)...$(RESET)"
+	@printf "$(YELLOW)Removing $(NAME)...$(RESET)\n"
 	@rm -f $(NAME)
 
 re: fclean all

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonathanamir <jonathanamir@student.42.f    +#+  +:+       +#+        */
+/*   By: yamir <yamir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 13:05:10 by yamir             #+#    #+#             */
-/*   Updated: 2025/12/11 13:06:22 by jonathanami      ###   ########.fr       */
+/*   Updated: 2025/12/01 16:11:28 by yamir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	free_all(char **arr, unsigned int d)
 	free(arr);
 }
 
-static unsigned int	word_count(char const *s, char c)
+unsigned int	word_count(char const *s, char c)
 {
 	unsigned int	i;
 	unsigned int	d;
@@ -38,7 +38,7 @@ static unsigned int	word_count(char const *s, char c)
 	return (d);
 }
 
-static char	**fill_array(char const *s, char c, char **arr)
+char	**fill_array(char const *s, char c, char **arr)
 {
 	unsigned int	i;
 	unsigned int	d;
