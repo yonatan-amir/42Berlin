@@ -1,107 +1,143 @@
-*This project has been created as part of the 42 curriculum by yamir.*
+*This project has been created as part of the 42 curriculum by yoyo.*
+
+<div align="center">
 
 # push_swap
 
-## Description
-`push_swap` is a constrained sorting project: sort a list of unique integers in ascending order using only two stacks (`a` and `b`) and a limited set of allowed operations (`sa`, `sb`, `ss`, `pa`, `pb`, `ra`, `rb`, `rr`, `rra`, `rrb`, `rrr`).
+### Architecture-First Implementation (42)
 
-The main objective is not only correctness, but minimizing operation count to meet benchmark targets.
+![Language](https://img.shields.io/badge/language-C-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/status-in%20progress-orange?style=for-the-badge)
+![Norm](https://img.shields.io/badge/42-Norminette-informational?style=for-the-badge)
+![Build](https://img.shields.io/badge/build-make%20re-success?style=for-the-badge)
 
-## Current Project State (Living)
-- Core data model is defined with linked lists:
-  - `t_node`: `value`, `index`, `next`
-  - `t_stack`: `head`, `tail`, `size`
-  - `t_ps`: stacks `a` and `b`
-- Input conversion/parsing is in progress in `push_swap/_source/num_converter.c`.
-- `num_converter` currently supports:
-  - single token input like `"42"`
-  - space-separated token input like `"3 2 1"`
-- Conversion validation currently includes:
-  - numeric format checks
-  - signed integer overflow/underflow checks via `ft_atoi_swap`
-  - sign-only input rejection (`"+"`, `"-"`)
-- Memory cleanup helpers currently in place:
-  - token cleanup via `free_tokens`
-  - failure-path cleanup in conversion flow
-- Sorting strategy selected: cost-based greedy insertion (not radix).
+</div>
 
-## Technical Approach and Thought Process
-### 1. Parsing first, algorithm second
-The project is being built in layers:
-1. Guarantee safe and deterministic parsing.
-2. Guarantee stable stack primitives.
-3. Build sorting logic on top of trusted primitives.
+<div align="center">
+<br>
+  <a href="#project-goal"><kbd> <br> Project Goal <br> </kbd></a>&ensp;&ensp;
+  <a href="#current-flow"><kbd> <br> Current Flow <br> </kbd></a>&ensp;&ensp;
+  <a href="#file-map"><kbd> <br> File Map <br> </kbd></a>&ensp;&ensp;
+  <a href="#build-and-run"><kbd> <br> Build & Run <br> </kbd></a>&ensp;&ensp;
+  <a href="#next-milestones"><kbd> <br> Next Milestones <br> </kbd></a>
+</div>
 
-Reasoning: if parsing and memory ownership are unreliable, sorting/debugging quality drops sharply.
+## Project Goal
+`push_swap` sorts unique integers in ascending order using only the allowed operations:
+`sa sb ss pa pb ra rb rr rra rrb rrr`
 
-### 2. Data structure choice
-Singly linked lists are used for stack representation to keep push/pop operations straightforward and to model stack behavior naturally.
+Project success requires both:
+- Correctness
+- Good operation count
 
-### 3. Algorithm choice
-Greedy cost-based insertion was chosen to optimize move count in practice for 42 benchmarks:
-- evaluate each candidate move cost
-- choose cheapest insertion step
-- combine rotations when possible (`rr` / `rrr`)
+## Current Status
+Current phase: **architecture + parser baseline complete, stack/sort implementation pending**.
 
-## Instructions
+### Stable now
+- `make re` build pipeline works
+- Error handling to `stderr` with `Error\n`
+- No-output behavior when no arguments
+- Numeric conversion and range checks (`INT_MIN` / `INT_MAX`)
+- Invalid token rejection
+- Duplicate detection on current parsed set
+
+### Pending
+- Build real stack/node structures in builder layer
+- Implement stack operations (`sa/pb/ra/...`)
+- Implement full greedy sorting logic
+- Final Norm cleanup and legacy file cleanup
+
+## Current Flow
+Runtime flow is now:
+
+1. `main` receives `argc/argv`
+2. `parser(...)` returns normalized `int *nums` + `count`
+3. `build_program(...)` consumes parsed array and prepares runtime stacks (currently stub)
+4. `sort(...)` runs solver and prints operations (currently stub)
+5. `clean_program(...)` releases runtime resources
+
+Error flow:
+- Any non-zero status from parser/build/sort prints `Error\n` to fd `2` and exits non-zero.
+
+## File Map
+### Entry
+- `push_swap.c`
+Purpose: Orchestrates parser, builder, sorter, and cleanup.
+
+### Contracts and Types
+- `push_swap.h`
+Purpose: Shared structs (`t_node`, `t_stack`, `t_ps`) and public module entrypoints.
+
+### Parsing
+- `parser.c`
+Purpose: Parse orchestration and duplicate detection for normalized integer arrays.
+
+- `num_converter.c`
+Purpose: Convert one input string into `int *` + count.
+
 ### Build
-Project sources are currently under:
-- `push_swap/_source`
+- `build_program.c`
+Purpose: Build `t_ps` stacks from parsed integers.
+Status: stub.
 
-Build command:
-```bash
-cd push_swap/_source
-make
-```
+### Sort
+- `sort.c`
+Purpose: Execute sorting strategy and emit operations.
+Status: stub.
 
-### Run (target behavior)
-When implementation is complete:
+### Cleanup
+- `clean_program.c`
+Purpose: Free runtime structures owned by `t_ps`.
+Status: placeholder.
+
+### Legacy / Planned Cleanup
+- `init_program.c`
+Purpose: legacy coordinator from earlier flow.
+Status: not part of active runtime path.
+
+- `node.c`, `stack.c`
+Purpose: earlier experiments and partial helpers.
+Status: planned refactor/removal once builder/stack modules are finalized.
+
+## Function Boundaries
+- `main`: orchestration only
+- `parser`: validation + conversion contract
+- `build_program`: data-to-structure construction
+- `sort`: algorithm and operation output
+- `clean_program`: lifecycle cleanup
+
+## Supported Cases (Current)
+- `./push_swap`
+- `./push_swap 42`
+- `./push_swap "3 2 1"`
+- `./push_swap 1 4 "6 8 9" 3`
+- `./push_swap "3 2 3"` -> `Error`
+- `./push_swap "3 a 1"` -> `Error`
+- overflow input -> `Error`
+
+## Build and Run
 ```bash
-./push_swap 2 1 3 6 5 8
+cd /home/yoyo/code/42berlin/level_2/push_swap/_source
+make re
 ./push_swap "3 2 1"
 ```
 
-### Validation flow (target)
-```bash
-ARG="4 67 3 87 23"
-./push_swap $ARG | wc -l
-./push_swap $ARG | ./checker_OS $ARG
-```
-
-## Subject Requirements Checklist
+## Subject Checklist
 - Program name: `push_swap`
-- Inputs: list of integers (stack `a`)
-- Output: only instructions, each followed by `\n`
-- No output on no arguments
-- On error: print `Error\n` to `stderr`
-- Handle invalid ints / overflow / duplicates
-- Free all heap allocations
-- Use allowed functions + libft policy from subject
-- Respect Norm on all submitted files
+- No output with no args
+- `Error\n` to stderr on invalid input
+- Reject invalid int / overflow / duplicates
+- Free allocated memory
+- Respect Norm in all submitted files
 
-## Benchmarks (from subject)
-- 100 numbers: `< 700` operations for top score target
-- 500 numbers: `<= 5500` operations for top score target
-
+## Next Milestones
+1. Finalize parser aggregation for all argv forms in one normalized array.
+2. Implement `build_program` to create `stack a` from `nums/count`.
+3. Implement stack operations and operation printer.
+4. Implement greedy insertion solver.
+5. Run full Norm pass and remove legacy files.
 
 ## Resources
-- Official 42 push_swap subject PDF (project root): `push_swap.en.subject.pdf`
-- 42 Norm PDF (repository root): `en.norm.pdf`
-- Linked-list and complexity references:
-  - CLRS (sorting and asymptotic complexity)
-  - GeeksforGeeks / CP-algorithms articles on stack operations and greedy heuristics
-
-## AI Usage
-- AI has been used to help structure this README.md file
-- All code decisions are manually reviewed and adjusted before integration.
-
-## Update Log
-- 2026-02-20:
-  - Established architecture (`t_ps`, `t_stack`, `t_node`) with linked-list direction.
-  - Refined number conversion flow (`num_converter`, `tokens_to_nums`).
-  - Improved `ft_atoi_swap` validation behavior and overflow checks.
-  - Confirmed greedy insertion direction for sorting strategy.
-
----
-
-This file is intentionally maintained as a living engineering log. It should be updated after each meaningful implementation milestone.
+- Subject PDF: `../push_swap.pdf`
+- Norm PDF (repo root): `../../norm.pdf`
+- 42 checker binary from intranet resources (`checker_OS`)

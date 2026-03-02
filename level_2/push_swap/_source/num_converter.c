@@ -84,7 +84,7 @@ static int	*tokens_to_nums(char **tokens, int *out_count)
 	int	nbr;
 	int	*nums;
 
-	if (!tokens || !*out_count)
+	if (!tokens || !out_count)
 		return (*out_count = 0, NULL);
 	count = 0;
 	while (tokens[count])

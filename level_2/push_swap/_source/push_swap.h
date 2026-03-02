@@ -25,9 +25,9 @@ typedef struct s_ps
 	t_stack			b;
 }					t_ps;
 
-int					init_program(t_ps *wrapper, int argc, char **argv);
+int					build_program(t_ps *wrapper, int *nums, int count);
 void				clean_program(t_ps *wrapper);
 int					sort(t_ps *wrapper);
-int					parser(int *status, int **nums, int *count, int argc,
-						char **argv);
+int					parser(int **nums, int *count, int argc, char **argv);
+int					*num_converter(const char *nptr, int *out_count);
 #endif

@@ -14,9 +14,9 @@ LIBFT_DIR := ft_printf/libft
 LIBFT     := $(LIBFT_DIR)/libft.a
 
 SRCS := push_swap.c \
-		init_program.c \
 		clean_program.c \
 		sort.c \
+		build_program.c \
 		num_converter.c \
 		parser.c \
 
