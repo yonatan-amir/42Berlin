@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   num_converter.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/05 13:14:52 by yoyo              #+#    #+#             */
+/*   Updated: 2026/03/06 13:03:33 by yoyo             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf/libft/libft.h"
 #include "limits.h"
 #include "push_swap.h"
 
-void	free_tokens(char **tokens)
+static void	free_tokens(char **tokens)
 {
 	int	i;
 
@@ -18,7 +30,7 @@ void	free_tokens(char **tokens)
 	free(tokens);
 }
 
-int	ft_atoi_swap(const char *nptr, int *out)
+static int	ft_atoi_swap(const char *nptr, int *out)
 {
 	long	num;
 	int		sign;
@@ -40,15 +52,14 @@ int	ft_atoi_swap(const char *nptr, int *out)
 		if (!ft_isdigit(nptr[i]))
 			return (0);
 		num = num * 10 + (nptr[i] - '0');
-		if ((sign == 1 && num > INT_MAX) || (sign == -1 && -num < INT_MIN))
+		if ((sign == 1 && num > INT_MAX) || (sign == -1 && (-num) < INT_MIN))
 			return (0);
 		i++;
 	}
-	*out = (int)(num * sign);
-	return (1);
+	return (*out = (int)(num * sign), 1);
 }
 
-char	**check_spaces(int *status, const char *nptr)
+static char	**check_spaces(int *status, const char *nptr)
 {
 	int		i;
 	char	**arr;
@@ -106,10 +117,10 @@ static int	*tokens_to_nums(char **tokens, int *out_count)
 
 int	*num_converter(const char *nptr, int *out_count)
 {
-	int status;
-	int nbr;
-	char **tokens;
-	int *nums;
+	int		status;
+	int		nbr;
+	char	**tokens;
+	int		*nums;
 
 	if (!out_count || !nptr)
 		return (NULL);

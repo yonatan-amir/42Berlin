@@ -1,18 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_program.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/06 13:02:44 by yoyo              #+#    #+#             */
+/*   Updated: 2026/03/06 13:02:45 by yoyo             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
-#include <stdlib.h>
 
-int	init_program(t_ps *wrapper, int argc, char **argv)
+int	init_program(t_ps *wrapper)
 {
-	int	count;
-	int	*nums;
-	int	status;
-
-	(void)wrapper;
-	count = 0;
-	nums = NULL;
-	if (argc < 2)
-		return (0);
-	status = parser(&nums, &count, argc, argv);
-	free(nums);
-	return (status);
+	if (!wrapper)
+		return (1);
+	wrapper->a.head = NULL;
+	wrapper->a.tail = NULL;
+	wrapper->a.size = 0;
+	wrapper->b.head = NULL;
+	wrapper->b.tail = NULL;
+	wrapper->b.size = 0;
+	return (0);
 }

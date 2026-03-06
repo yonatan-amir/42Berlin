@@ -1,5 +1,17 @@
-#include "ft_printf/libft/libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/05 13:14:59 by yoyo              #+#    #+#             */
+/*   Updated: 2026/03/05 13:15:00 by yoyo             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
+#include "ft_printf/libft/libft.h"
 #include <stdlib.h>
 
 static int	error_exit(t_ps *wrapper, int *nums)
@@ -17,9 +29,11 @@ int	main(int const argc, char **argv)
 	int		count;
 	int		status;
 
-	ft_bzero(&wrapper, sizeof(t_ps));
 	nums = NULL;
 	count = 0;
+	status = init_program(&wrapper);
+	if (status != 0)
+		return (error_exit(&wrapper, nums));
 	if (argc == 1)
 		return (0);
 	status = parser(&nums, &count, argc, argv);

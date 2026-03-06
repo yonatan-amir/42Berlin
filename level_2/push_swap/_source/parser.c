@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/05 13:18:44 by yoyo              #+#    #+#             */
+/*   Updated: 2026/03/05 13:18:44 by yoyo             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <stdlib.h>
 
@@ -47,12 +59,29 @@ static int	*merge_nums(int *base, int base_count, int *chunk, int chunk_count)
 	return (merged);
 }
 
+static int	append_converted(int **nums, int *count, const char *arg)
+{
+	int	*chunk;
+	int	*merged;
+	int	chunk_count;
+
+	chunk_count = 0;
+	chunk = num_converter(arg, &chunk_count);
+	if (!chunk)
+		return (free(*nums), *nums = NULL, *count = 0, 1);
+	merged = merge_nums(*nums, *count, chunk, chunk_count);
+	free(chunk);
+	if (!merged)
+		return (free(*nums), *nums = NULL, *count = 0, 1);
+	free(*nums);
+	*nums = merged;
+	*count += chunk_count;
+	return (0);
+}
+
 int	parser(int **nums, int *count, int argc, char **argv)
 {
 	int	i;
-	int	chunk_count;
-	int	*chunk;
-	int	*merged;
 
 	if (!nums || !count || !argv || argc < 1)
 		return (1);
@@ -61,17 +90,8 @@ int	parser(int **nums, int *count, int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		chunk_count = 0;
-		chunk = num_converter(argv[i], &chunk_count);
-		if (!chunk)
-			return (free(*nums), *nums = NULL, *count = 0, 1);
-		merged = merge_nums(*nums, *count, chunk, chunk_count);
-		free(chunk);
-		if (!merged)
-			return (free(*nums), *nums = NULL, *count = 0, 1);
-		free(*nums);
-		*nums = merged;
-		*count += chunk_count;
+		if (append_converted(nums, count, argv[i]) != 0)
+			return (1);
 		i++;
 	}
 	if (check_dup(*nums, *count) != 0)
