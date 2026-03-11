@@ -6,7 +6,7 @@
 /*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:15:01 by yoyo              #+#    #+#             */
-/*   Updated: 2026/03/05 13:15:04 by yoyo             ###   ########.fr       */
+/*   Updated: 2026/03/09 15:59:22 by yoyo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,15 @@ void				clean_program(t_ps *wrapper);
 int					sort(t_ps *wrapper);
 int					parser(int **nums, int *count, int argc, char **argv);
 int					*num_converter(const char *nptr, int *out_count);
+void				sa(t_ps *wrapper);
+void				sb(t_ps *wrapper);
+void				ss(t_ps *wrapper);
+void				pa(t_ps *wrapper);
+void				pb(t_ps *wrapper);
+void				ra(t_ps *wrapper);
+void				rb(t_ps *wrapper);
+void				rr(t_ps *wrapper);
+void				rra(t_ps *wrapper);
+void				rrb(t_ps *wrapper);
+void				rrr(t_ps *wrapper);
 #endif

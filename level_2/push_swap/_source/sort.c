@@ -6,14 +6,15 @@
 /*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:15:05 by yoyo              #+#    #+#             */
-/*   Updated: 2026/03/05 13:16:32 by yoyo             ###   ########.fr       */
+/*   Updated: 2026/03/09 16:02:31 by yoyo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	sort(t_ps *yes)
+int	sort(t_ps *wrapper)
 {
-	(void)yes;
+	if (wrapper->a.size < 2)
+		return (0);
 	return (0);
 }
