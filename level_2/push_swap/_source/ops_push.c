@@ -15,24 +15,18 @@
 
 static void	push(t_stack *stack_a, t_stack *stack_b)
 {
-	t_node	*temp_a;
-	t_node	*temp_b;
+	t_node	*temp;
 
-	temp_a = stack_b->head;
+	temp = stack_b->head;
 	stack_b->head = stack_b->head->next;
 	stack_b->size--;
 	if (stack_b->size == 0)
 		stack_b->tail = NULL;
+	temp->next = stack_a->head;
+	stack_a->head = temp;
 	stack_a->size++;
-	if (stack_a->size > 1)
-	{
-		temp_b = stack_a->head;
-		stack_a->head = temp_a;
-		temp_a->next = temp_b;
-		return ;
-	}
-	stack_a->head = temp_a;
-	stack_a->tail = stack_a->head;
+	if (stack_a->size == 1)
+		stack_a->tail = stack_a->head;
 }
 
 void	pa(t_ps *wrapper)

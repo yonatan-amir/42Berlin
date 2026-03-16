@@ -53,6 +53,8 @@ int					*num_converter(const char *nptr, int *out_count);
 int					insert_chunks(t_ps *wrapper);
 int					get_target_pos(t_stack stack_a, int index);
 int					get_pos(t_stack stack, t_node *target);
+void				set_dirs(t_move *curr, t_ps *wrapper);
+int					get_move_cost(t_move move, t_ps *wrapper);
 void				sa(t_ps *wrapper);
 void				sb(t_ps *wrapper);
 void				ss(t_ps *wrapper);

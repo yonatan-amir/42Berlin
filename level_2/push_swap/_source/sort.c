@@ -6,7 +6,7 @@
 /*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:15:05 by yoyo              #+#    #+#             */
-/*   Updated: 2026/03/16 15:16:58 by yoyo             ###   ########.fr       */
+/*   Updated: 2026/03/16 20:42:28 by yoyo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,59 +14,62 @@
 
 static void	sort_small(t_ps *wrapper)
 {
+	int	first;
+	int	second;
+	int	third;
+
 	if (wrapper->a.size == 2)
 	{
 		if (wrapper->a.head->index > wrapper->a.tail->index)
 			return (sa(wrapper));
 		return ;
 	}
-	if (wrapper->a.head->index == 0 && wrapper->a.head->next->index == 2)
-		return (rra(wrapper), sa(wrapper));
-	else if (wrapper->a.head->index == 1 && wrapper->a.head->next->index == 0)
+	first = wrapper->a.head->index;
+	second = wrapper->a.head->next->index;
+	third = wrapper->a.tail->index;
+	if (first < second && second < third)
+		return ;
+	if (first > second && second < third && first < third)
 		return (sa(wrapper));
-	else if (wrapper->a.head->index == 1 && wrapper->a.head->next->index == 2)
-		return (rra(wrapper));
-	else if (wrapper->a.head->index == 2 && wrapper->a.head->next->index == 0)
-		return (ra(wrapper));
-	else if (wrapper->a.head->index == 2 && wrapper->a.head->next->index == 1)
+	if (first > second && second > third)
 		return (sa(wrapper), rra(wrapper));
+	if (first > second && second < third && first > third)
+		return (ra(wrapper));
+	if (first < second && second > third && first < third)
+		return (sa(wrapper), ra(wrapper));
+	return (rra(wrapper));
 }
 
 static int	get_chunk_size(int size)
 {
-	int	chunk_size;
-
 	if (size <= 10)
-		chunk_size = 2;
-	else if (size <= 50)
-		chunk_size = 4;
-	else
-		chunk_size = size / 10;
-	chunk_size = size / chunk_size;
-	return (chunk_size);
+		return (2);
+	if (size <= 50)
+		return (7);
+	if (size <= 100)
+		return (15);
+	return (35);
 }
 
 static void	push_chunks(t_ps *wrapper)
 {
 	int	chunk_size;
-	int	curr_chunk;
-	int	chunk_counter;
+	int	pushed;
 
 	chunk_size = get_chunk_size(wrapper->a.size);
-	curr_chunk = chunk_size + 3;
-	chunk_counter = chunk_size;
+	pushed = 0;
 	while (wrapper->a.size > 3)
 	{
-		if (wrapper->a.head->index >= curr_chunk - chunk_size
-			&& wrapper->a.head->index <= curr_chunk)
+		if (wrapper->a.head->index <= pushed)
 		{
 			pb(wrapper);
-			chunk_counter--;
-			if (chunk_counter == 0)
-			{
-				curr_chunk += chunk_size;
-				chunk_counter = chunk_size;
-			}
+			rb(wrapper);
+			pushed++;
+		}
+		else if (wrapper->a.head->index <= pushed + chunk_size)
+		{
+			pb(wrapper);
+			pushed++;
 		}
 		else
 			ra(wrapper);
@@ -94,17 +97,28 @@ static int	is_sorted(t_stack stack_a)
 
 int	sort(t_ps *wrapper)
 {
-	if (wrapper->a.size < 2)
-		return (0);
-	if (is_sorted(wrapper->a))
+	int		counter;
+	t_node	*temp;
+
+	counter = 0;
+	if (wrapper->a.size < 2 || is_sorted(wrapper->a))
 		return (0);
 	if (wrapper->a.size <= 3)
 		return (sort_small(wrapper), 0);
-	else
+	push_chunks(wrapper);
+	sort_small(wrapper);
+	insert_chunks(wrapper);
+	temp = wrapper->a.head;
+	while (temp->index != 0)
 	{
-		push_chunks(wrapper);
-		sort_small(wrapper);
-		insert_chunks(wrapper);
+		temp = temp->next;
+		counter++;
 	}
+	if (counter <= wrapper->a.size - counter)
+		while (wrapper->a.head->index != 0)
+			ra(wrapper);
+	else
+		while (wrapper->a.head->index != 0)
+			rra(wrapper);
 	return (0);
 }

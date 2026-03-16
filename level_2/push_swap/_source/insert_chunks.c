@@ -6,31 +6,55 @@
 /*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 15:14:23 by yoyo              #+#    #+#             */
-/*   Updated: 2026/03/16 19:48:53 by yoyo             ###   ########.fr       */
+/*   Updated: 2026/03/16 20:51:09 by yoyo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+static int	apply_joint_rot(t_ps *wrapper, t_move move, int count, int steps[2])
+{
+	if (count < steps[0] && move.dir_a == 0
+		&& count < steps[1] && move.dir_b == 0)
+		return (rr(wrapper), 1);
+	if (count < steps[0] && move.dir_a == 1
+		&& count < steps[1] && move.dir_b == 1)
+		return (rrr(wrapper), 1);
+	return (0);
+}
+
+static void	apply_single_rot(t_ps *wrapper, t_move move,
+		int count, int steps[2])
+{
+	if (count < steps[0] && move.dir_a == 0)
+		ra(wrapper);
+	if (count < steps[0] && move.dir_a == 1)
+		rra(wrapper);
+	if (count < steps[1] && move.dir_b == 0)
+		rb(wrapper);
+	if (count < steps[1] && move.dir_b == 1)
+		rrb(wrapper);
+}
+
 static void	execute(t_ps *wrapper, t_move move)
 {
-}
+	int	count;
+	int	steps[2];
 
-static void	set_dirs(t_move *curr, t_ps *wrapper)
-{
-	curr->dir_a = 0;
-	curr->dir_b = 0;
-	if (curr->pos_a > wrapper->a.size - curr->pos_a)
-		curr->dir_a = 1;
-	if (curr->pos_b > wrapper->b.size - curr->pos_b)
-		curr->dir_b = 1;
-}
-
-static int	get_cost(int pos, int size)
-{
-	if (pos <= size - pos)
-		return (pos);
-	return (size - pos);
+	count = 0;
+	steps[0] = move.pos_a;
+	steps[1] = move.pos_b;
+	if (move.dir_a == 1)
+		steps[0] = wrapper->a.size - move.pos_a;
+	if (move.dir_b == 1)
+		steps[1] = wrapper->b.size - move.pos_b;
+	while (count < steps[0] || count < steps[1])
+	{
+		if (apply_joint_rot(wrapper, move, count, steps) == 0)
+			apply_single_rot(wrapper, move, count, steps);
+		count++;
+	}
+	pa(wrapper);
 }
 
 static t_move	find_cheapest(t_ps *wrapper)
@@ -50,9 +74,7 @@ static t_move	find_cheapest(t_ps *wrapper)
 		curr.pos_a = get_target_pos(wrapper->a, temp->index);
 		curr.pos_b = get_pos(wrapper->b, temp);
 		set_dirs(&curr, wrapper);
-		if (get_cost(curr.pos_a, wrapper->a.size) + get_cost(curr.pos_b,
-				wrapper->b.size) < get_cost(best.pos_a, wrapper->a.size)
-			+ get_cost(best.pos_b, wrapper->b.size))
+		if (get_move_cost(curr, wrapper) < get_move_cost(best, wrapper))
 			best = curr;
 		temp = temp->next;
 	}
