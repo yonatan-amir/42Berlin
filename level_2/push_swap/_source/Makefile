@@ -24,6 +24,8 @@ SRCS := push_swap.c \
 				ops_push.c \
 				ops_rotate.c \
 				ops_r_rotate.c \
+				insert_chunks.c \
+				pos_utility.c \
 
 OBJS := $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:15:01 by yoyo              #+#    #+#             */
-/*   Updated: 2026/03/09 15:59:22 by yoyo             ###   ########.fr       */
+/*   Updated: 2026/03/16 19:10:54 by yoyo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 # include <stddef.h>
 
+typedef struct s_move
+{
+	int				pos_b;
+	int				pos_a;
+	int				dir_b;
+	int				dir_a;
+}					t_move;
 typedef struct s_node
 {
 	int				value;
@@ -43,6 +50,9 @@ void				clean_program(t_ps *wrapper);
 int					sort(t_ps *wrapper);
 int					parser(int **nums, int *count, int argc, char **argv);
 int					*num_converter(const char *nptr, int *out_count);
+int					insert_chunks(t_ps *wrapper);
+int					get_target_pos(t_stack stack_a, int index);
+int					get_pos(t_stack stack, t_node *target);
 void				sa(t_ps *wrapper);
 void				sb(t_ps *wrapper);
 void				ss(t_ps *wrapper);

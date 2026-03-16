@@ -149,11 +149,8 @@ make re
 
 ## Next Milestones
 
-1. Delete `node.c` and `stack.c` (dead code).
-2. Implement the 11 stack operations across `ops_swap.c`, `ops_push.c`, `ops_rotate.c`, `ops_reverse.c`.
-3. Add index normalization to `build_program` (rank each value 0..n-1).
-4. Implement sort algorithm — hardcoded for 2/3 elements, Turkish cost-based insertion for larger sets.
-5. Run full Norm pass (`norminette`).
+1. Implement sort algorithm — hardcoded for 2/3 elements, Turkish cost-based insertion for larger sets.
+2. Run full Norm pass (`norminette`).
 
 ## Sorting Algorithm: Turkish Algorithm
 
