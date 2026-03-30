@@ -6,7 +6,7 @@
 /*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:14:52 by yoyo              #+#    #+#             */
-/*   Updated: 2026/03/06 13:03:33 by yoyo             ###   ########.fr       */
+/*   Updated: 2026/03/27 13:48:13 by yoyo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 #include "limits.h"
 #include "push_swap.h"
 
-static void	free_tokens(char **tokens)
+static void	free_chars(char **chars)
 {
 	int	i;
 
-	if (!tokens)
+	if (!chars)
 		return ;
 	i = 0;
-	while (tokens[i])
+	while (chars[i])
 	{
-		free(tokens[i]);
-		tokens[i] = NULL;
+		free(chars[i]);
+		chars[i] = NULL;
 		i++;
 	}
-	free(tokens);
+	free(chars);
 }
 
 static int	ft_atoi_swap(const char *nptr, int *out)
@@ -80,7 +80,7 @@ static char	**check_spaces(int *status, const char *nptr)
 	arr = ft_split(nptr, ' ');
 	if (!arr || !arr[0])
 	{
-		free_tokens(arr);
+		free_chars(arr);
 		*status = -1;
 		return (NULL);
 	}
@@ -88,29 +88,29 @@ static char	**check_spaces(int *status, const char *nptr)
 	return (arr);
 }
 
-static int	*tokens_to_nums(char **tokens, int *out_count)
+static int	*chars_to_nums(char **chars, int *out_count)
 {
 	int	count;
 	int	i;
 	int	nbr;
 	int	*nums;
 
-	if (!tokens || !out_count)
+	if (!chars || !out_count)
 		return (*out_count = 0, NULL);
 	count = 0;
-	while (tokens[count])
+	while (chars[count])
 		count++;
 	nums = malloc(sizeof(int) * count);
 	if (!nums)
-		return (free_tokens(tokens), *out_count = 0, NULL);
+		return (free_chars(chars), *out_count = 0, NULL);
 	i = 0;
 	while (i < count)
 	{
-		if (!ft_atoi_swap(tokens[i], &nbr))
-			return (free(nums), free_tokens(tokens), *out_count = 0, NULL);
+		if (!ft_atoi_swap(chars[i], &nbr))
+			return (free(nums), free_chars(chars), *out_count = 0, NULL);
 		nums[i++] = nbr;
 	}
-	free_tokens(tokens);
+	free_chars(chars);
 	*out_count = count;
 	return (nums);
 }
@@ -119,13 +119,13 @@ int	*num_converter(const char *nptr, int *out_count)
 {
 	int		status;
 	int		nbr;
-	char	**tokens;
+	char	**chars;
 	int		*nums;
 
 	if (!out_count || !nptr)
 		return (NULL);
 	status = 0;
-	tokens = check_spaces(&status, nptr);
+	chars = check_spaces(&status, nptr);
 	if (status == -1)
 		return (*out_count = 0, NULL);
 	if (status == 0)
@@ -134,10 +134,10 @@ int	*num_converter(const char *nptr, int *out_count)
 			return (*out_count = 0, NULL);
 		nums = malloc(sizeof(int));
 		if (!nums)
-			return (free_tokens(tokens), *out_count = 0, NULL);
+			return (free_chars(chars), *out_count = 0, NULL);
 		nums[0] = nbr;
 		*out_count = 1;
 		return (nums);
 	}
-	return (tokens_to_nums(tokens, out_count));
+	return (chars_to_nums(chars, out_count));
 }

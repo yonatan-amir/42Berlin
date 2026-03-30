@@ -484,3 +484,9 @@ make re
 - Norm PDF: `../../norm.pdf`
 - 42 checker binary from intranet resources (`checker_OS`)
 
+## AI
+
+- Ai was used in styling This readme file
+- Ai was used to expand on my knowledge and to help better document my solution to this task
+- Ai was also used styling the make file commands to look like arch linux
+- Ai was used in explanation of the subject and understanding.

@@ -6,7 +6,7 @@
 /*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:18:44 by yoyo              #+#    #+#             */
-/*   Updated: 2026/03/05 13:18:44 by yoyo             ###   ########.fr       */
+/*   Updated: 2026/03/27 13:18:03 by yoyo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,25 @@ static int	check_dup(int *nums, int count)
 	return (0);
 }
 
-static int	*merge_nums(int *base, int base_count, int *chunk, int chunk_count)
+static int	*merge_nums(int *nums, int count, int *chunk, int chunk_count)
 {
 	int	*merged;
 	int	i;
 
 	if (!chunk || chunk_count <= 0)
 		return (NULL);
-	merged = malloc(sizeof(int) * (base_count + chunk_count));
+	merged = malloc(sizeof(int) * (count + chunk_count));
 	if (!merged)
 		return (NULL);
 	i = 0;
-	while (i < base_count)
+	while (i < count)
 	{
-		merged[i] = base[i];
+		merged[i] = nums[i];
 		i++;
 	}
-	while (i < base_count + chunk_count)
+	while (i < count + chunk_count)
 	{
-		merged[i] = chunk[i - base_count];
+		merged[i] = chunk[i - count];
 		i++;
 	}
 	return (merged);
