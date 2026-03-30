@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   num_converter.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yamir <yamir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 13:14:52 by yoyo              #+#    #+#             */
-/*   Updated: 2026/03/27 13:48:13 by yoyo             ###   ########.fr       */
+/*   Created: 2026/03/30 13:09:28 by yamir             #+#    #+#             */
+/*   Updated: 2026/03/30 13:09:28 by yamir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/libft/libft.h"
 #include "limits.h"
 #include "push_swap.h"
+#include <stdlib.h>
 
 static void	free_chars(char **chars)
 {
@@ -45,11 +45,11 @@ static int	ft_atoi_swap(const char *nptr, int *out)
 		sign = -1;
 	if (nptr[i] == '+' || nptr[i] == '-')
 		i++;
-	if (!ft_isdigit(nptr[i]))
+	if (!ps_isdigit(nptr[i]))
 		return (0);
 	while (nptr[i])
 	{
-		if (!ft_isdigit(nptr[i]))
+		if (!ps_isdigit(nptr[i]))
 			return (0);
 		num = num * 10 + (nptr[i] - '0');
 		if ((sign == 1 && num > INT_MAX) || (sign == -1 && (-num) < INT_MIN))
@@ -77,7 +77,7 @@ static char	**check_spaces(int *status, const char *nptr)
 		*status = 0;
 		return (NULL);
 	}
-	arr = ft_split(nptr, ' ');
+	arr = ps_split(nptr, ' ');
 	if (!arr || !arr[0])
 	{
 		free_chars(arr);

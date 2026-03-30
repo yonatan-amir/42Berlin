@@ -257,6 +257,12 @@ a greedy, cost-based insertion strategy.
 - `num_converter.c`
   Purpose: convert one argument string into validated integers.
 
+- `ps_utils.c`
+  Purpose: small local replacements for character and output helpers.
+
+- `ps_split.c`
+  Purpose: split one argument string into tokens without `libft`.
+
 ### Stack Construction
 
 - `build_program.c`
@@ -286,14 +292,6 @@ a greedy, cost-based insertion strategy.
 
 - `ops_r_rotate.c`
   Purpose: implement `rra`, `rrb`, `rrr`.
-
-### Libraries
-
-- `ft_printf/`
-  Purpose: custom printf implementation.
-
-- `ft_printf/libft/`
-  Purpose: utility library used by `ft_printf` and parser helpers.
 
 ## Function Guide
 
@@ -337,8 +335,8 @@ a greedy, cost-based insertion strategy.
 
 ### `num_converter.c`
 
-- `free_tokens`
-  Frees the token array created by `ft_split`.
+- `free_chars`
+  Frees the token array created by `ps_split`.
 
 - `ft_atoi_swap`
   Strict integer conversion with overflow detection.
@@ -351,6 +349,28 @@ a greedy, cost-based insertion strategy.
 
 - `num_converter`
   Main converter for one argument string.
+
+### `ps_utils.c`
+
+- `ps_isdigit`
+  Local digit check used by the parser helpers.
+
+- `ps_putstr_fd`
+  Writes a string to a file descriptor.
+
+### `ps_split.c`
+
+- `count_words`
+  Counts how many tokens will be created for a split.
+
+- `free_split`
+  Frees a partially built split result on allocation failure.
+
+- `dup_word`
+  Duplicates one token into a newly allocated string.
+
+- `ps_split`
+  Splits a string by a delimiter into a null-terminated array.
 
 ### `build_program.c`
 
@@ -464,7 +484,7 @@ That order follows the actual life cycle of the program.
 ## Build And Run
 
 ```bash
-cd /home/yoyo/code/42berlin/level_2/push_swap/_source
+cd /home/yamir/code/42berlin/level_2/push_swap/_source
 make re
 ./push_swap "3 2 1"
 ```

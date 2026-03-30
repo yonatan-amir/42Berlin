@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yamir <yamir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 13:14:59 by yoyo              #+#    #+#             */
-/*   Updated: 2026/03/09 16:26:01 by yoyo             ###   ########.fr       */
+/*   Created: 2026/03/30 13:10:01 by yamir             #+#    #+#             */
+/*   Updated: 2026/03/30 13:10:01 by yamir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/libft/libft.h"
 #include "push_swap.h"
 #include <stdlib.h>
 
@@ -40,7 +39,7 @@ static int	error_exit(t_ps *wrapper, int *nums)
 {
 	clean_program(wrapper);
 	free(nums);
-	ft_putstr_fd("Error\n", 2);
+	ps_putstr_fd("Error\n", 2);
 	return (1);
 }
 

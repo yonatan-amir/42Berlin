@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ps_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yamir <yamir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/05 16:47:59 by yamir             #+#    #+#             */
-/*   Updated: 2025/12/05 18:56:35 by yamir            ###   ########.fr       */
+/*   Created: 2026/03/30 13:09:56 by yamir             #+#    #+#             */
+/*   Updated: 2026/03/30 13:09:57 by yamir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
+#include <unistd.h>
 
-t_list	*ft_lstlast(t_list *lst)
+int	ps_isdigit(int c)
 {
-	int	i;
+	return (c >= '0' && c <= '9');
+}
 
-	if (!lst)
-		return (NULL);
-	i = 0;
-	while (lst->next)
-	{
-		i++;
-		lst = lst->next;
-	}
-	return (lst);
+void	ps_putstr_fd(const char *s, int fd)
+{
+	size_t	len;
+
+	if (!s)
+		return ;
+	len = 0;
+	while (s[len])
+		len++;
+	write(fd, s, len);
 }

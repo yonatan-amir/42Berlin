@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   insert_chunks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yamir <yamir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/16 15:14:23 by yoyo              #+#    #+#             */
-/*   Updated: 2026/03/16 20:51:09 by yoyo             ###   ########.fr       */
+/*   Created: 2026/03/30 13:09:18 by yamir             #+#    #+#             */
+/*   Updated: 2026/03/30 13:09:18 by yamir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static int	apply_joint_rot(t_ps *wrapper, t_move move, int count, int steps[2])
 {
-	if (count < steps[0] && move.dir_a == 0
-		&& count < steps[1] && move.dir_b == 0)
+	if (count < steps[0] && move.dir_a == 0 && count < steps[1]
+		&& move.dir_b == 0)
 		return (rr(wrapper), 1);
-	if (count < steps[0] && move.dir_a == 1
-		&& count < steps[1] && move.dir_b == 1)
+	if (count < steps[0] && move.dir_a == 1 && count < steps[1]
+		&& move.dir_b == 1)
 		return (rrr(wrapper), 1);
 	return (0);
 }
 
-static void	apply_single_rot(t_ps *wrapper, t_move move,
-		int count, int steps[2])
+static void	apply_single_rot(t_ps *wrapper, t_move move, int count,
+		int steps[2])
 {
 	if (count < steps[0] && move.dir_a == 0)
 		ra(wrapper);

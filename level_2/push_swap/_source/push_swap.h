@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yamir <yamir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 13:15:01 by yoyo              #+#    #+#             */
-/*   Updated: 2026/03/16 19:10:54 by yoyo             ###   ########.fr       */
+/*   Created: 2026/03/30 13:10:05 by yamir             #+#    #+#             */
+/*   Updated: 2026/03/30 13:10:05 by yamir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,7 @@ void				rr(t_ps *wrapper);
 void				rra(t_ps *wrapper);
 void				rrb(t_ps *wrapper);
 void				rrr(t_ps *wrapper);
+int					ps_isdigit(int c);
+void				ps_putstr_fd(const char *s, int fd);
+char				**ps_split(const char *s, char c);
 #endif
