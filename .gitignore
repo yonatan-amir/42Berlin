@@ -58,7 +58,7 @@ temp/
 tmp/
 
 ####################################
-# Node / frontend (future-proof)
+# Node / frontend
 ####################################
 node_modules/
 dist/
@@ -69,3 +69,12 @@ build/
 ####################################
 .env
 .env.*
+
+####################################
+# Python / uv
+####################################
+.venv/
+__pycache__/
+*.pyc
+.mypy_cache/
+.pytest_cache/
