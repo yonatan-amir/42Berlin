@@ -1,152 +1,116 @@
-_This project has been created as part of the 42 curriculum by yoyo._
-
 # 42Berlin
 
-## Description
+This repository documents my progress through the 42 Berlin curriculum.
 
-This repository tracks my progress through the 42 Berlin curriculum and keeps my
-project sources, local testers, and supporting documentation in one place.
+It reflects my development as a programmer, starting from low-level C programming and moving toward higher-level concepts including Python and AI-related topics in the newer curriculum.
 
-The current active Level 2 project is `push_swap`. At this stage, the project
-already handles argument parsing, integer conversion, duplicate detection, stack
-construction, cleanup, index assignment, and the full set of primitive stack
-operations. The sorting strategy itself is not implemented yet, so the project
-builds cleanly but is not ready for submission.
+---
 
-The repository is organized by training phase:
+## About
 
-- `piscine/` for Piscine exercises and rushes
-- `pre_core/` for early preparatory work
-- `Level_0/` for core level 0 projects
-- `level_1/` for core level 1 projects
-- `level_2/` for core level 2 projects
+42 Berlin has been a key part of strengthening my foundations as a developer.
 
-Within each project, `_source/` contains the submission-ready code and nearby
-test or helper folders are used only for local development.
+The curriculum is structured to build deep understanding step by step, starting with:
 
-## Current Progress
+- low-level programming in C
+- memory management and pointers
+- algorithms and data structures
+- system-level thinking and constraints
 
-### Completed or available in the repo
+And evolving into:
+
+- higher-level programming (Python)
+- problem solving at scale
+- exposure to modern topics including AI
+
+---
+
+## What this repository contains
+
+The repository is organized by learning stages and project levels, including:
+
+- Piscine exercises and early training
+- Core curriculum projects (C-based)
+- Intermediate and advanced problem-solving projects
+- Newer curriculum modules (Python / AI-related work as applicable)
+
+Each folder represents a stage in the learning process and documents both completed and ongoing work.
+
+---
+
+## Topics covered
+
+Across this repository, I’ve been developing experience with:
+
+### Low-level and systems
+- C programming
+- pointers and memory management
+- file descriptors and low-level I/O
+- debugging under constraints
+- Makefiles and compilation rules
+
+### Core software engineering
+- data structures
+- algorithmic thinking
+- parsing and validation
+- writing structured and maintainable code
+
+### Newer curriculum areas
+- Python programming
+- higher-level abstractions
+- introduction to AI-related concepts (as part of evolving curriculum)
+
+---
+
+## Example projects
+
+Some of the projects included in this repository:
 
 - `libft`
 - `ft_printf`
 - `get_next_line`
-- `born_2_b_root`
-- Piscine and pre-core exercises
-
-### In progress
-
 - `push_swap`
+- additional Python / AI modules (as the curriculum progresses)
 
-Current `push_swap` status from the code in
-`level_2/push_swap/_source/`:
+Each project focuses on a different aspect of programming, from building foundational libraries to solving algorithmic challenges.
 
-- `Makefile` builds `push_swap`, `ft_printf`, and `libft`
-- input parsing accepts split and quoted arguments
-- invalid tokens, overflows, and duplicates return `Error\n` on stderr
-- stack `a` is built as a linked list
-- node indexes are assigned by rank after construction
-- `sa`, `sb`, `ss`, `pa`, `pb`, `ra`, `rb`, `rr`, `rra`, `rrb`, `rrr`
-  are implemented
-- cleanup is present for allocated stack nodes
-- `sort.c` is still a stub, so unsorted input is not solved yet
+---
 
-## Instructions
+## Why this repository matters
 
-General workflow for this repository:
+This repository represents a different kind of learning compared to typical tutorial-based development.
 
-1. Enter the target project directory.
-2. Work in that project's `_source/` directory.
-3. Read the subject PDF and confirm allowed functions.
-4. Build with the local `Makefile`.
-5. Run project-specific tests or local testers when available.
-6. Run `norminette` before treating the project as ready.
+The 42 curriculum emphasizes:
 
-To build the current `push_swap` work:
+- understanding how things work under the hood
+- solving problems with strict constraints
+- writing efficient and precise code
+- developing resilience through debugging and iteration
 
-```sh
-cd level_2/push_swap/_source
-make re
-```
+It has significantly improved how I think about systems, performance, and code structure.
 
-Example runs:
+---
 
-```sh
-./push_swap
-./push_swap 42
-./push_swap "3 2 1"
-./push_swap 1 4 "6 8 9" 3
-```
+## Repository structure
 
-Current behavior of `push_swap`:
+- `piscine/` — early shell and C exercises
+- `pre_core/` — preparatory work
+- `Level_0/` — initial core projects
+- `level_1/` — intermediate projects
+- `level_2/` — more advanced challenges
+- future modules — Python and AI-related content
 
-- with no arguments, it prints nothing
-- on invalid input, it prints `Error` followed by a newline to standard error
-- on valid unsorted input, it currently does not emit a sorting sequence because
-  the solver is not implemented yet
+---
 
-Submission workflow used in this repository:
+## Notes
 
-1. Copy the contents of the relevant `_source/` directory into a fresh 42
-   project repository.
-2. Rebuild from scratch.
-3. Run `norminette`.
-4. Re-run tests and manual checks.
-5. Push only after the code matches the subject requirements.
+This repository is a living record of my progress.
 
-## Norm And Constraints
+Some projects are complete, others are still evolving, and new areas (such as Python and AI) will be added as I move further into the curriculum.
 
-The repository follows the 42 Norm from [`norm.pdf`](/home/yoyo/code/42berlin/norm.pdf).
-The main constraints I am applying across C projects are:
+---
 
-- snake_case naming for files, functions, variables, and types
-- 25-line maximum per function
-- 80-column maximum per line
-- tab-based indentation
-- declarations at the top of each function
-- `-Wall -Wextra -Werror`
-- no unnecessary relinking in Makefiles
-- memory must be freed correctly
+## Author
 
-For `push_swap`, the subject in
-[`level_2/push_swap/push_swap.pdf`](/home/yoyo/code/42berlin/level_2/push_swap/push_swap.pdf)
-also requires:
-
-- a program named `push_swap`
-- integers only, no duplicates
-- `Error\n` on stderr for invalid input
-- the shortest possible sorting instruction sequence in practice
-- instructions separated only by newlines
-
-## Repository Layout
-
-- `piscine/`: early shell and C exercises
-- `pre_core/`: preparatory exercises before the common core
-- `Level_0/libft/`: custom C standard-library subset
-- `level_1/printf/`: `ft_printf`
-- `level_1/get_next_line/`: line-by-line file descriptor reader
-- `level_1/born_2_b_root/`: system administration project
-- `level_2/push_swap/`: stack-sorting project
-
-## Resources
-
-Classic references:
-
-- 42 Norm: [`norm.pdf`](/home/yoyo/code/42berlin/norm.pdf)
-- `push_swap` subject:
-  [`level_2/push_swap/push_swap.pdf`](/home/yoyo/code/42berlin/level_2/push_swap/push_swap.pdf)
-- `man 2 write`
-- `man 3 malloc`
-- `man 3 free`
-- `man 3 exit`
-- linked list and stack manipulation references from course notes and standard C
-  documentation
-
-AI usage:
-
-- AI was used to review the repository structure, compare the current codebase
-  against the `push_swap` subject, extract the relevant README requirements from
-  the subject PDF, and rewrite this root `README.md` so it matches the actual
-  state of the project.
-- AI was not used here to claim missing `push_swap` features as completed; the
-  README now explicitly states that the sorting algorithm is still pending.
+Yonatan Amir 
+Berlin, Germany
