@@ -1,0 +1,13 @@
+[project]
+name = "code-cultivation"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "flake8>=7.3.0",
+    "mypy>=1.20.1",
+]
