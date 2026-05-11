@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m flake8 \"level_2\" --max-line-length=79)",
+      "Bash(pip install *)",
+      "Bash(python -c \"import PyPDF2; r=PyPDF2.PdfReader\\('C:/Users/Jonat/projects/42Berlin/en.norm.pdf'\\); print\\('\\\\n'.join\\([r.pages[i].extract_text\\(\\) for i in range\\(min\\(5,len\\(r.pages\\)\\)\\)]\\)\\)\")",
+      "Bash(python *)"
+    ]
+  }
+}
