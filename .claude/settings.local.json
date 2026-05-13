@@ -4,7 +4,13 @@
       "Bash(python -m flake8 \"level_2\" --max-line-length=79)",
       "Bash(pip install *)",
       "Bash(python -c \"import PyPDF2; r=PyPDF2.PdfReader\\('C:/Users/Jonat/projects/42Berlin/en.norm.pdf'\\); print\\('\\\\n'.join\\([r.pages[i].extract_text\\(\\) for i in range\\(min\\(5,len\\(r.pages\\)\\)\\)]\\)\\)\")",
-      "Bash(python *)"
+      "Bash(python *)",
+      "PowerShell(wsl bash -c \"echo \\\\$SHELL && ls ~/.zshrc ~/.bashrc 2>/dev/null\")",
+      "PowerShell(wsl bash -c \"grep -n 'posh\\\\|prompt\\\\|PROMPT' ~/.zshrc ~/.bashrc 2>/dev/null\")",
+      "PowerShell(wsl bash -c \"which oh-my-posh 2>/dev/null && oh-my-posh --version 2>/dev/null || echo 'not installed'\")",
+      "PowerShell(wsl bash -c \"head -20 ~/.zshrc\")",
+      "PowerShell(wsl bash -c \"curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.local/bin 2>&1\" 2>&1)",
+      "PowerShell(wsl bash -c \"sudo apt-get install -y unzip 2>&1 && curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.local/bin 2>&1\")"
     ]
   }
 }
